@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "GAI.h"
+#import <Parse/Parse.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +19,39 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //Google Analytics
+    //Parse
+    [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"lG5Njs7mn0FAdKG7nyir8TD5Hze2bkef8lNE1jli"
+                  clientKey:@"CKjhaesJ9LBAhMkDvQTPw52gsgHgq8HdQAy4rIiR"];
+   
+   
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Initialize tracker. Replace with your tracking ID.
+    
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-59929101-1"];
+    
+    
+    
+    //Google maps
+    
+     [GMSServices provideAPIKey:@"AIzaSyDs703lLfydRw7Z0C-xqIbkV5Xydhl04ho"];
+ 
+    
+    
+ 
     return YES;
 }
 
